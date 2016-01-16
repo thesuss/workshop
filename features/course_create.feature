@@ -6,7 +6,7 @@ Scenario: List courses
   Given I am on the home page
   And I am logged in as an administrator
   When I click "All courses" link
-  Then I should see "You have not created any courses"
+  Then I should see "Det finns inga kategorier"
 
 Scenario: Create a course
   Given I am on the home page
