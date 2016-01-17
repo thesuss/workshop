@@ -22,6 +22,9 @@ module NavigationHelpers
     when /the Course index page/
       '/courses/index'
 
+    when /Registration page/
+      '/users/register'
+
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

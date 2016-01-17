@@ -1,7 +1,9 @@
 require 'sinatra/base'
 require 'padrino-helpers'
 require 'data_mapper'
+require 'pry'
 require './lib/course'
+require './lib/user'
 
 
 class WorkshopApp < Sinatra::Base
@@ -11,6 +13,9 @@ class WorkshopApp < Sinatra::Base
   # Logga in
   set :admin_logged_in, false
   # databaskoppling
+  enable :sessions
+  set :session_secret, '11223344556677'
+
   env = ENV['RACK_ENV'] || 'development'
   DataMapper.setup(:default, ENV['DATABASE_URL'] || "postgres://localhost/workshop_#{env}")
   DataMapper::Model.raise_on_save_failure = true
@@ -21,7 +26,7 @@ class WorkshopApp < Sinatra::Base
   get '/' do
     erb :index
   end
-  ##Lista alla kurser i DB och skicka till visa 
+  ##Lista alla kurser i DB och skicka till visa
   get '/courses/index' do
     @courses = Course.all
     erb :'courses/index'
@@ -40,6 +45,25 @@ class WorkshopApp < Sinatra::Base
                   description: params[:course][:description])
     redirect 'courses/index'
   end
+
+  get '/users/register' do
+    erb :'users/register'
+  end
+  post '/users/create' do
+    begin
+      User.create(name: params[:user][:name],
+                  email: params[:user][:email],
+                  password: params[:user][:password],
+                  password_confirmation: params[:user][:password_confirmation])
+      session[:flash] = "Your account has been created, #{params[:user][:name]}"
+      redirect '/'
+    rescue
+      session[:flash] = 'Could not register you... Check your input.'
+      redirect '/users/register'
+    end
+  end
+
+
 
 
   # start the server if ruby file executed directly
