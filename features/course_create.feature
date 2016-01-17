@@ -5,7 +5,7 @@ Feature: As a course administrator,
 Scenario: List courses
  Given I am a registered and logged in user
   When I click "All courses" link
-  Then I should see "Det finns inga kategorier"
+  Then I should see "You have not created any courses"
 
 Scenario: Create a course
 Given I am a registered and logged in user
@@ -26,3 +26,14 @@ Given I am a registered and logged in user
   Scenario: Non logged in user can not access the create new course form
     Given I am on Create course page
     And I should see "You are not authorized to access this page"
+
+Scenario: Add a delivery date to course
+  Given the course "Basic programming" is created
+  And I am on the Course index page
+  And I click on "Add Delivery date" for the "Basic programming" Course
+  And I fill in "Start" with "2015-12-01"
+  And I click "Submit" link
+  Then I should be on the Course index page
+  And I should see "Basic programming"
+  And I should see "Delivery dates:"
+  And I should see "2015-12-01"
