@@ -22,6 +22,35 @@ class WorkshopApp < Sinatra::Base
   DataMapper.finalize
   DataMapper.auto_upgrade!
 
+
+  before do
+    @user = User.get(session[:user_id]) unless is_user?
+  end
+
+  register do
+    def auth (type)
+      condition do
+        redirect '/login' unless send("is_#{type}?")
+      end
+    end
+  end
+
+  helpers do
+    def is_user?
+      @user != nil
+    end
+
+    def current_user
+      @user
+    end
+  end
+
+  get '/users/logout' do
+    session[:user_id] = nil
+    session[:flash] = 'Successfully logged out'
+    redirect '/'
+  end
+
   # Skapa innehåll
   get '/' do
     erb :index
@@ -63,6 +92,16 @@ class WorkshopApp < Sinatra::Base
     end
   end
 
+  get '/users/login' do
+    erb :'users/login'
+  end
+
+  post '/users/session' do
+    @user = User.authenticate(params[:email], params[:password])
+    session[:user_id] = @user.id
+    session[:flash] = "Successfully logged in  #{@user.name}"
+    redirect '/'
+  end
 
 
 
