@@ -1,5 +1,4 @@
 # Taken from the cucumber-rails project.
-
 module NavigationHelpers
   # Maps a name to a path. Used by the
   #
@@ -26,7 +25,8 @@ module NavigationHelpers
       '/users/register'
     when /Log in page/
 '/users/login'
-
+when /Create course page/
+  '/courses/create'
     else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"

@@ -10,8 +10,6 @@ class WorkshopApp < Sinatra::Base
   # Minskar hackers
   register Padrino::Helpers
   set :protect_from_csrf, true
-  # Logga in
-  set :admin_logged_in, false
   # databaskoppling
   enable :sessions
   set :session_secret, '11223344556677'
@@ -22,18 +20,18 @@ class WorkshopApp < Sinatra::Base
   DataMapper.finalize
   DataMapper.auto_upgrade!
 
-
   before do
     @user = User.get(session[:user_id]) unless is_user?
   end
 
   register do
-    def auth (type)
+    def auth(type)
       condition do
-        redirect '/login' unless send("is_#{type}?")
+        restrict_access = Proc.new { session[:flash] = 'You are not authorized to access this page'; redirect '/' }
+        restrict_access.call unless send("is_#{type}?")
       end
-    end
-  end
+   end
+ end
 
   helpers do
     def is_user?
@@ -65,7 +63,7 @@ class WorkshopApp < Sinatra::Base
     erb :'courses/index'
   end
 
-  get '/courses/create' do
+  get '/courses/create', auth: :user do
     erb :'courses/create'
   end
 
