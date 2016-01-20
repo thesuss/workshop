@@ -1,10 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,400italic);
-body {
-    font-family: 'Open Sans', Arial, sans-serif;
-}
-.top-bar {
-    background:#ccc;
-}
+
+
 
 .footer {
     background-color: #cd2324;
@@ -23,7 +19,7 @@ body {
     margin: 0 0 1rem;
 }
 
-.footer p.copywrite {
+.copywrite {
     color: #FFF;
     font-size: 0.875rem;
     margin: 0;
@@ -170,11 +166,21 @@ body {
 
 /* SUSS */
 
-.top-bar .top-bar-section ul li>a.button {
-	background-color:rgba(95,43,124,1.00);
-	color:rgba(255,255,255,1.00)
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
 }
-.top-bar .top-bar-section ul li>a.button:hover {
-	color:rgba(255,255,255,1.00);
-	background-color:rgba(90,40,117,1.00)
+
+
+.top-bar-section ul li {
+    background: #FFF none repeat scroll 0% 0%;
+    color:#000;
+}
+
+.top-bar {
+    background:#FFF;
+    color:#000;
+}
+
+.title-area {
+    padding-left:30%;
 }
