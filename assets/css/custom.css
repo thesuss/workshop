@@ -200,3 +200,29 @@ h1, h2, h3, h4, h5, h6 {
 .footer a {
     color: #fff;
 }
+
+input[type="submit"] {
+	-moz-box-shadow:inset 0px 39px 0px -24px #e67a73;
+	-webkit-box-shadow:inset 0px 39px 0px -24px #e67a73;
+	box-shadow:inset 0px 39px 0px -24px #e67a73;
+	background-color:#e4685d;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:15px;
+	font-weight:600;
+	padding:6px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+}
+input[type="submit"]:hover {
+	background-color:#eb675e;
+}
+input[type="submit"]:active {
+	position:relative;
+	top:1px;
+}
