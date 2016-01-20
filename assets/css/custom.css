@@ -238,3 +238,13 @@ input[type="submit"]:active {
     min-height:280px;
     padding-top:20px;
 }
+.top-bar .toggle-topbar.menu-icon a {
+    color: #555;
+    line-height: 33px;
+}
+.top-bar.expanded .title-area {
+    background: #FFF none repeat scroll 0% 0%;
+}
+.top-bar.expanded .toggle-topbar a {
+    color: #555;
+}
