@@ -3,10 +3,9 @@
 
 
 .footer {
-    background-color: #cd2324;
     text-align: right;
     font-size: 1.2rem;
-    padding: 4rem;
+    padding: 1rem;
 }
 
 .footer .slogan {
@@ -226,4 +225,16 @@ input[type="submit"]:hover {
 input[type="submit"]:active {
 	position:relative;
 	top:1px;
+}
+.footer {
+    margin-top:35px;
+    background: #cd2324; /* Old browsers */
+    background: -moz-linear-gradient(top,  #cd2324 0%, #931a1a 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  #cd2324 0%,#931a1a 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  #cd2324 0%,#931a1a 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cd2324', endColorstr='#931a1a',GradientType=0 ); /* IE6-9 */
+}
+.huvud {
+    min-height:280px;
+    padding-top:20px;
 }
