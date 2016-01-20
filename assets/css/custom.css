@@ -218,6 +218,7 @@ input[type="submit"] {
 	padding:6px 15px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #b23e35;
+	margin-bottom:25px;
 }
 input[type="submit"]:hover {
 	background-color:#eb675e;
