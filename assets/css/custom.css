@@ -1,3 +1,11 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,400italic);
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+.top-bar {
+    background:#ccc;
+}
+
 .footer {
     background-color: #cd2324;
     text-align: right;
@@ -25,7 +33,6 @@
     color: #ffffff;
     list-style: none;
     font-weight: normal;
-    color: #ffffff;
     margin: 0;
 }
 
@@ -50,7 +57,6 @@
 .top-bar-section ul li > p {
     color: #FFFFFF;
     display: block;
-    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-size: 0.8125rem;
     font-weight: normal;
     text-transform: none;
