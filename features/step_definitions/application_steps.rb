@@ -21,7 +21,7 @@ Given(/^I am a registered and logged in user$/) do
   steps %(
     Given I am a registered user
     And I am on the home page
-    And I click "Log in" link
+    And I click "Logga in" link
     Then I should be on Log in page
     And I fill in "Email" with "thomas@random.com"
     And I fill in "Password" with "my_password"
