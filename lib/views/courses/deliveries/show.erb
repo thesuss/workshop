@@ -9,8 +9,8 @@
 <div>
   <% if @delivery.students.any? %>
     Students:
-    <% @delivery.students.each do |student| %>
-      <%= [student.full_name, ''].join(' ') %>
-    <% end %> <br>
-  <% end %>
+    <ul><% @delivery.students.each do |student| %>
+      <li><%= [student.full_name, ''].join(' ') %></li>
+    <% end %>
+  <% end %></ul>
 </div>
