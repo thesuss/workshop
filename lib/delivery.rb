@@ -5,4 +5,7 @@ class Delivery
   property :start_date, Date
 
   belongs_to :course
+  
+  has n, :students, through: Resource
+  
 end

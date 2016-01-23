@@ -11,27 +11,27 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
-
-    # Add more mappings here.
-    # Here is an example that pulls values out of the Regexp:
-    #
-    #   when /^(.*)'s profile page$/i
-    #     user_profile_path(User.find_by_login($1))
-
     when /the Course index page/
       '/courses/index'
 
     when /Registration page/
       '/users/register'
     when /Log in page/
-'/users/login'
-when /Create course page/
-  '/courses/create'
-    else
+      '/users/login'
+    when /Create course page/
+      '/courses/create'
+    when /^(.*) show page$/i
+      d = Delivery.find(date: $1).first
+      "/courses/deliveries/show/#{d.id}"
+  
+  
+      else
       raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
         "Now, go and add a mapping in #{__FILE__}"
     end
   end
 end
+
+
 
 World(NavigationHelpers)
