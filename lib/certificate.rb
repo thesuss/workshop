@@ -1,5 +1,7 @@
 
 require './lib/certificate_generator'
+require 'aws-sdk'
+require 'bitly'
 
 class Certificate
   include CertificateGenerator
