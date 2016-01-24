@@ -1,10 +1,14 @@
 require 'prawn'
 require 'rmagick'
 require 'aws-sdk'
-require 'dotenv'
+if ENV['RACK_ENV'] != 'production'
+  require 'dotenv'
+end
 
 module CertificateGenerator
-  Dotenv.load!
+  if ENV['RACK_ENV'] != 'production'
+    Dotenv.load
+  end
   CURRENT_ENV = ENV['RACK_ENV'] || 'development'
   PATH = "pdf/#{CURRENT_ENV}/"
   TEMPLATE = File.absolute_path('./pdf/templates/certificate_tpl.jpg')
@@ -29,7 +33,9 @@ module CertificateGenerator
     upload_to_s3(certificate_output, image_output)
 
     { certificate_key: certificate_output, image_key: image_output }
+
   end
+
 
   private
 
@@ -70,5 +76,5 @@ module CertificateGenerator
     s3_image_object = S3.bucket(ENV['S3_BUCKET']).object(image_output)
     s3_image_object.upload_file(image_output, acl: 'public-read')
   end
-
+  
 end

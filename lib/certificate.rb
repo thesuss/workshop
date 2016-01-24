@@ -24,19 +24,23 @@ class Certificate
     self.save!
   end
 
+
    before :destroy do
     s3 = Aws::S3::Resource.new(region: ENV['AWS_REGION'])
     bucket = s3.bucket(ENV['S3_BUCKET'])
 
     certificate_key = bucket.object(self.certificate_key)
     image_key = bucket.object(self.image_key)
-
     certificate_key.delete
     image_key.delete
    end
-  
-    after :create do
-      CertificateGenerator.generate(self)
-    end
+   
+   def image_url
+  "https://#{ENV['S3_BUCKET']}.s3.amazonaws.com/#{self.image_key}"
+end
+
+def certificate_url
+  "https://#{ENV['S3_BUCKET']}.s3.amazonaws.com/#{self.certificate_key}"
+end
   
 end
