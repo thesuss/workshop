@@ -11,6 +11,7 @@ source 'http://rubygems.org'
   gem 'rmagick'
   gem 'aws-sdk'
   gem 'dotenv'
+  gem 'bitly'
 
 group :developmnet, :test do
    gem 'cucumber'

@@ -36,9 +36,9 @@ class Certificate
     image_key.delete
    end
    
-   def image_url
+  def image_url
   "https://#{ENV['S3_BUCKET']}.s3.amazonaws.com/#{self.image_key}"
-end
+  end
 
 def certificate_url
   "https://#{ENV['S3_BUCKET']}.s3.amazonaws.com/#{self.certificate_key}"
