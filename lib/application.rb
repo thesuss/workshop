@@ -2,18 +2,19 @@
 require 'sinatra/base'
 require 'padrino-helpers'
 require 'data_mapper'
-#require "pry"
+if ENV['RACK_ENV'] != 'production'
+  require 'pry'
+  require 'dotenv'
+end
 require './lib/course'
 require './lib/user'
 require './lib/delivery'
 require './lib/student'
-
-if ENV['RACK_ENV'] != 'production'
-  require 'pry'
-end
 require './lib/csv_parse'
+require './lib/certificate'
 
 class WorkshopApp < Sinatra::Base
+  Dotenv.load
   include CSVParse
   register Padrino::Helpers
   set :protect_from_csrf, true
@@ -93,6 +94,15 @@ post '/courses/deliveries/file_upload' do
   redirect "/courses/deliveries/show/#{@delivery.id}"
 end
 
+get '/courses/generate/:id' do
+  @delivery = Delivery.get(params[:id].to_i)
+  @delivery.students.each do |student|
+    c = student.certificates.new(created_at: DateTime.now, delivery: @delivery)
+    c.save
+  end
+  redirect "/courses/deliveries/show/#{@delivery.id}"
+end
+
    get '/users/register' do
     erb :'users/register'
 
@@ -129,7 +139,16 @@ end
      redirect '/'
    end
 
-
+  # Verification URI
+  get '/verify/:hash' do
+    @certificate = Certificate.first(identifier: params[:hash])
+    if @certificate
+      @image = "/img/usr/#{env}/" + [@certificate.student.full_name, @certificate.delivery.start_date].join('_').downcase.gsub!(/\s/, '_') + '.jpg'
+      erb :'verify/valid'
+    else
+      erb :'verify/invalid'
+    end
+  end
 
 
   # start the server if ruby file executed directly

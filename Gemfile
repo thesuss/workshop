@@ -7,6 +7,10 @@ source 'http://rubygems.org'
   gem 'dm-postgres-adapter'
   gem 'pg'
   gem 'bcrypt'
+  gem 'prawn'
+  gem 'rmagick'
+  gem 'aws-sdk'
+  gem 'dotenv'
 
 group :developmnet, :test do
    gem 'cucumber'

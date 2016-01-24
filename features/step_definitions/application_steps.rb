@@ -63,3 +63,36 @@ end
 Then(/^([^"]*) instances of "([^"]*)" should be created$/) do |count, model|
   expect(Object.const_get(model).count).to eq count.to_i
 end
+
+And(/^the data file for "([^"]*)" is imported$/) do |date|
+  steps %(
+    And I am on the Course index page
+    And I click on "#{date}" for the "Basic" Course
+    When I select the "students.csv" file
+    And I click "Submit" link
+  )
+end
+
+Then(/^([^"]*) certificates should be generated$/) do |count|
+  pdf_count = Dir['pdf/test/**/*.pdf'].length
+  expect(pdf_count).to eq count.to_i
+end
+
+And(/^([^"]*) images of certificates should be created$/) do |count|
+  image_count = Dir['assets/img/usr/test/**/*.jpg'].length
+  expect(image_count).to eq count.to_i
+end
+
+Given(/^valid certificates exists$/) do
+  steps %(
+    Given the delivery for the course "Basic" is set to "2015-12-01"
+    And the data file for "2015-12-01" is imported
+    And I am on 2015-12-01 show page
+    And I click "Generate certificates" link
+  )
+end
+
+And(/^I visit the url for a certificate$/) do
+  cert = Certificate.last
+  visit "/verify/#{cert.identifier}"
+end
