@@ -47,24 +47,25 @@ module CertificateGenerator
     Prawn::Document.generate(output,
                              page_size: 'A4',
                              background: TEMPLATE,
-                             background_scale: 0.8231,
+                             background_scale: 1,
                              page_layout: :landscape,
-                             left_margin: 30,
-                             right_margin: 40,
-                             top_margin: 7,
+                             left_margin: 0,
+                             right_margin: 0,
+                             top_margin: 0,
                              bottom_margin: 0,
                              skip_encoding: true) do |pdf|
-      pdf.move_down 245
+      pdf.move_down 220
       pdf.font 'assets/fonts/Gotham-Bold.ttf'
-      pdf.text details[:name], size: 44, color: '009900', align: :center
-      pdf.move_down 20
+      pdf.text details[:name], size: 44, color: '009900', indent_paragraphs: 120
+      pdf.move_down 75
       pdf.font 'assets/fonts/Gotham-Medium.ttf'
-      pdf.text details[:course_name], indent_paragraphs: 150, size: 20
-      pdf.text details[:course_desc], indent_paragraphs: 150, size: 20
+      pdf.text details[:course_name], indent_paragraphs: 120, size: 20
+      pdf.text details[:course_desc], indent_paragraphs: 120, size: 20
       pdf.move_down 95
       pdf.text "Göteborg #{details[:date]}", indent_paragraphs: 120, size: 12
       pdf.move_down 65
-      pdf.text "To verify this certificate, visit: #{get_url(details[:verify_url])}", indent_paragraphs: 100, size: 8
+      pdf.text "To verify the authenticity of this Course certificate, please visit: #{get_url(details[:verify_url])}", align: :center, size: 8
+    
       end
   end
 
