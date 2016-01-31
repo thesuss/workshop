@@ -13,7 +13,7 @@ module CertificateGenerator
   Bitly.use_api_version_3
   CURRENT_ENV = ENV['RACK_ENV'] || 'development'
   PATH = "pdf/#{CURRENT_ENV}/"
-  TEMPLATE = File.absolute_path('./pdf/templates/diplom_720.jpg')
+  TEMPLATE = File.absolute_path('./pdf/templates/diplom.jpg')
   URL = ENV['SERVER_URL'] || 'http://localhost:9292/verify/'
   S3 = Aws::S3::Resource.new(region: ENV['AWS_REGION'])
   BITLY = Bitly.new(ENV['BITLY_USERNAME'], ENV['BITLY_API_KEY'])
